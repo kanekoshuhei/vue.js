@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 export default {
   created() {
     this.addresses = this.$store.state.addresses;
@@ -40,18 +38,10 @@ export default {
         { text: "電話番号", value: "tel" },
         { text: "メールアドレス", value: "email" },
         { text: "住所", value: "address" },
-        { text: "操作", sortable: false }
+        { text: "操作", value: "action", sortable: false }
       ],
       addresses: []
     };
-  },
-  methods: {
-    deleteConfirm(id) {
-      if (confirm("削除してよろしいですか？")) {
-        this.deleteAddress({ id });
-      }
-    },
-    ...mapActions(["deleteAddress"])
   }
 };
 </script>
