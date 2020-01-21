@@ -45,8 +45,9 @@ export default new Vuex.Store({
       })
     },
     login() {
-      const google_auth_provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithRedirect(google_auth_provider)
+      const twitter_auth_provider = new firebase.auth.TwitterAuthProvider()
+      // const google_auth_provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithRedirect(twitter_auth_provider)
     },
     logout() {
       firebase.auth().signOut()
