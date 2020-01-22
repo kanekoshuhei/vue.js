@@ -33,6 +33,28 @@ import { mapActions } from 'vuex'
 export default {
   created() {
     this.addresses = this.$store.state.addresses;
+    const Twitter = require("twitter");
+    const functions = require('firebase-functions');
+    // const request = require('request-promise');
+
+    var client = new Twitter({
+      consumer_key: encodeURIComponent(functions.config().twitter.consumer_key),
+      consumer_secret: encodeURIComponent(functions.config().twitter.consumer_secret),
+      access_token_key: encodeURIComponent(functions.config().twitter.access_token_key),
+      access_token_secret: encodeURIComponent(functions.config().twitter.access_token_secret),
+      request_options: {
+        proxy: 'https://cors-anywhere.herokuapp.com/'
+      }
+    })
+
+    var params = {screen_name: 'TDR_PR','count': 5};
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
+      if (!error) {
+        console.log(tweets);
+        console.log(response);
+      }
+    });
+
   },
   data() {
     return {
