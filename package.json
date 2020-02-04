@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "core-js": "^3.4.4",
+    "dns": "^0.2.2",
     "firebase": "^7.6.1",
     "firebase-admin": "^8.9.1",
     "firebase-functions": "^3.3.0",
+    "http2": "^3.3.7",
     "twitter": "^1.7.1",
     "vue": "^2.6.10",
     "vue-loader": "^14.2.2",
