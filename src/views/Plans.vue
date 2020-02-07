@@ -6,7 +6,7 @@
       </v-flex>
 
       <v-flex xs12 mt-5 mr-5 text-right>
-        <router-link :to="{ name: 'address_edit' }">
+        <router-link :to="{ name: 'plan_edit' }">
           <v-btn color="info">
             追加
           </v-btn>
@@ -14,7 +14,10 @@
       </v-flex>
 
       <v-flex xs12 mt-3 justify-center>
-        <v-data-table :headers='headers' :items='addresses'>
+        <v-data-table :headers='headers' :items='plans'>
+          <template v-slot:item.date="{ item }">
+            <span>{{item.date.toDate() | moment}}</span>
+          </template>
           <template v-slot:item.action="{ item }">
             <router-link :to="{ name: 'address_edit', params: { address_id: item.id }}">
               <v-icon small class="mr-2">mdi-pencil</v-icon>
@@ -29,10 +32,11 @@
 
 <script>
 import { mapActions } from 'vuex'
+import moment from 'moment';
 
 export default {
   created() {
-    this.addresses = this.$store.state.addresses;
+    this.plans = this.$store.state.plans;
     // const Twitter = require("twitter");
     // const functions = require('firebase-functions');
     // const request = require('request-promise');
@@ -59,22 +63,25 @@ export default {
   data() {
     return {
       headers: [
-        { text: "名前", value: "name" },
-        { text: "電話番号", value: "tel" },
-        { text: "メールアドレス", value: "email" },
-        { text: "住所", value: "address" },
+        { text: "日時", value: "date" },
+        { text: "ショー", value: "show" },
         { text: "操作", value: "action", sortable: false }
       ],
-      addresses: []
+      plans: []
     };
+  },
+  filters: {
+    moment: function (date) {
+        return moment(date).format('YYYY年MM月DD日 HH:mm');
+    }
   },
   methods: {
     deleteConfirm (id) {
       if (confirm('削除してよろしいですか？')) {
-        this.deleteAddress({ id })
+        this.deletePlan({ id })
       }
     },
-    ...mapActions(['deleteAddress'])
+    ...mapActions(['deletePlan'])
   }
 };
 </script>

@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     login_user: null,
     drawer: false,
-    addresses: []
+    addresses: [],
+    plans: [],
   },
   mutations: {
     setLoginUser(state, user) {
@@ -34,6 +35,18 @@ export default new Vuex.Store({
 
       state.addresses.splice(index, 1)
     },
+    addPlans(state, { id, plan }) {
+      plan.id = id
+      state.plans.push(plan)
+    },
+    updatePlans(state, { id, plan }) {
+      const index = state.plans.findIndex(plan => plan.id === id)
+      state.plans[index] = plan
+    },
+    deletePlans(state, { id }) {
+      const index = state.plans.findIndex(plan => plan.id === id)
+      state.plans.splice(index, 1)
+    },
   },
   actions: {
     setLoginUser({ commit }, user) {
@@ -42,6 +55,11 @@ export default new Vuex.Store({
     fetchAddresses({ getters, commit }) {
       firebase.firestore().collection(`users/${getters.uid}/addresses`).get().then(snapshot => {
         snapshot.forEach(doc => commit('addAddress', { id: doc.id, address: doc.data() }))
+      })
+    },
+    fetchPlans({ commit }) {
+      firebase.firestore().collection(`plans`).get().then(snapshot => {
+        snapshot.forEach(doc => commit('addPlans', { id: doc.id, plan: doc.data() }))
       })
     },
     login() {
@@ -78,7 +96,14 @@ export default new Vuex.Store({
           commit('deleteAddress', { id })
         })
       }
-    }
+    },
+    addPlans({ getters, commit }, plan) {
+      if (getters.uid) {
+        firebase.firestore().collection(`plans`).add(plan).then(doc => {
+          commit('addPlan', { id: doc.id, plan })
+        })
+      }
+    },
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',

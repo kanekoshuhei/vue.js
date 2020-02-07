@@ -33,6 +33,7 @@ export default {
       if (user) {
         this.setLoginUser(user);
         this.fetchAddresses();
+        this.fetchPlans();
         if (this.$router.currentRoute.name === "home") {
           this.$router.push({ name: "addresses" });
         }
@@ -51,7 +52,8 @@ export default {
       "setLoginUser",
       "logout",
       "deleteLoginUser",
-      "fetchAddresses"
+      "fetchAddresses",
+      "fetchPlans"
     ])
   }
 };
