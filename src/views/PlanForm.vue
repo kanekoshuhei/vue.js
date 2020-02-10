@@ -9,19 +9,18 @@
         <v-card>
           <v-card-text>
             <v-form>
-              <v-select :parks="(value, key) in parks" v-model="selectedKey" v-on:change="selected" label="パーク"></v-select>
-              <v-select v-model="plan.show" v-if="selectedItem" :shows="shows" label="ショー">
-                {{ item.name }}
-              </v-select>
-              <p class="title">日付</p>
               <v-date-picker
                 v-model="plan.date"
                 full-width
                 locale="jp-ja"
                 :day-format="date => new Date(date).getDate()"
+                class="mb-5"
                 label="日付">
               </v-date-picker>
-              <div class="text-center">
+              <v-select :items="parks" v-model="selectedPark" v-on:change="changedPark" label="PARK" required></v-select>
+              <v-select :items="shows" v-model="plan.show" item-text="name" item-value="id" v-on:change="changedShow" label="SHOW" required></v-select>
+              <!-- <v-select :items="shows" v-model="plan.show" item-text="name" item-value="id" label="TIME" required></v-select> -->
+              <div class="text-center mt-5">
                 <v-btn @click="$router.push({ name: 'plans' })">キャンセル</v-btn>
                 <v-btn color="info" class="ml-2" @click="submit">保存</v-btn>
               </div>
@@ -35,7 +34,9 @@
 
 <script>
 import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import prefs from "../mixins/PrefsMixin.js";
+// import schedules from '../assets/show_schedule.json'
 
 export default {
   created() {
@@ -53,29 +54,16 @@ export default {
   data() {
     return {
       plan: {},
-      selectedKey: '',
-      selectedItem:'',
-      parks: {
-          Toyota: [
-              { name: 'Aqua' },
-              { name: 'Prius' },
-              { name: 'Collora' },
-              { name: 'Vitz' },
-              { name: 'Crown' },
-          ],
-          Honda: [
-              { name: 'N-BOX' },
-              { name: 'Freed' },
-              { name: 'VEZEL' },
-              { name: 'N-WGN' },
-              { name: 'Fit' },
-          ],
-      }
+      selectedPark: 'a',
+      selectedShow: 'iOS',
+      parks: ['a','b'],
+      // schedules: schedules
     };
   },
   mixins: [prefs],
   methods: {
     submit() {
+      this.$set(this.plan, 'twitter_id', this.login_user_twitter_id);
       if (this.$route.params.plan_id) {
         this.updatePlan({
           id: this.$route.params.plan_id,
@@ -84,13 +72,32 @@ export default {
       } else {
         this.addPlan(this.plan);
       }
-      this.$router.push({ name: "planes" });
+      this.$router.push({ name: "plans" });
       this.plan = {};
     },
-    selected() {
-      this.selectedItem = this.items[this.selectedKey];
+    changedPark() {
+      var tmp_shows = [];
+      if (this.selectedPark == 'a') {
+        tmp_shows = [
+          {id: 1, name: 'iOS'},
+          {id: 2, name: 'Android'},
+          {id: 3, name: 'FrontEnd'},
+          {id: 4, name: 'BackEnd'},
+          {id: 5, name: 'Server'},
+        ]
+      } else if (this.selectedPark == 'b') {
+        tmp_shows = [
+          {id: 6, name: 'UI / UX'},
+          {id: 7, name: 'Tools'},
+        ]
+      }
+      this.shows = tmp_shows;
     },
-    ...mapActions(["addPlan", "updatePlan"])
+    changedShow() {
+
+    },
+    ...mapActions(["addPlan", "updatePlan"]),
+    ...mapGetters(["login_user_twitter_id"])
   }
 };
 </script>

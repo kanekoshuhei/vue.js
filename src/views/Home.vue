@@ -2,7 +2,7 @@
   <v-container text-center justify-center>
     <v-layout row wrap>
       <v-flex xs12>
-        <h1>Twitter取得アプリ</h1>
+        <h1></h1>
         <p>Twitterアカウントでログインしてください。</p>
       </v-flex>
 

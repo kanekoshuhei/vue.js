@@ -10,6 +10,7 @@ export default new Vuex.Store({
     drawer: false,
     addresses: [],
     plans: [],
+    login_user_twitter_id: ''
   },
   mutations: {
     setLoginUser(state, user) {
@@ -62,10 +63,16 @@ export default new Vuex.Store({
         snapshot.forEach(doc => commit('addPlans', { id: doc.id, plan: doc.data() }))
       })
     },
-    login() {
+    login(state) {
       const twitter_auth_provider = new firebase.auth.TwitterAuthProvider()
       // const google_auth_provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithRedirect(twitter_auth_provider)
+      firebase.auth().signInWithPopup(twitter_auth_provider).then((userCredential) => {
+        // Get the Twitter screen name.
+        state.login_user_twitter_id = userCredential.additionalUserInfo.username;
+      }).catch((error) => {
+        // An error occurred.
+        console.log(error);
+      });
     },
     logout() {
       firebase.auth().signOut()
@@ -109,6 +116,7 @@ export default new Vuex.Store({
     userName: state => state.login_user ? state.login_user.displayName : '',
     photoURL: state => state.login_user ? state.login_user.photoURL : '',
     uid: state => state.login_user ? state.login_user.uid : null,
-    getAddressById: state => id => state.addresses.find(address => address.id === id)
+    login_user_twitter_id: state => state.login_user ? state.login_user_twitter_id : null,
+    getAddressById: state => id => state.addresses.find(address => address.id === id),
   }
 })
