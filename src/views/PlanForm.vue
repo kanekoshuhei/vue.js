@@ -57,13 +57,15 @@ export default {
       selectedPark: 'a',
       selectedShow: 'iOS',
       parks: ['a','b'],
+      shows: [],
       // schedules: schedules
     };
   },
   mixins: [prefs],
   methods: {
     submit() {
-      this.$set(this.plan, 'twitter_id', this.login_user_twitter_id);
+      console.log(this.$store.state);
+      this.$set(this.plan, 'twitter_id', this.$store.state.login_user_twitter_id);
       if (this.$route.params.plan_id) {
         this.updatePlan({
           id: this.$route.params.plan_id,
