@@ -16,6 +16,9 @@ export default new Vuex.Store({
     setLoginUser(state, user) {
       state.login_user = user
     },
+    setTwitterLoginUser(state, twitter_id) {
+      state.login_user_twitter_id = twitter_id
+    },
     deleteLoginUser(state) {
       state.login_user = null
     },
@@ -63,12 +66,12 @@ export default new Vuex.Store({
         snapshot.forEach(doc => commit('addPlan', { id: doc.id, plan: doc.data() }))
       })
     },
-    login(state) {
+    login({ commit }) {
       const twitter_auth_provider = new firebase.auth.TwitterAuthProvider()
       // const google_auth_provider = new firebase.auth.GoogleAuthProvider()
       firebase.auth().signInWithPopup(twitter_auth_provider).then((userCredential) => {
         // Get the Twitter screen name.
-        state.login_user_twitter_id = userCredential.additionalUserInfo.username;
+        commit('setTwitterLoginUser', userCredential.additionalUserInfo.username);
       }).catch((error) => {
         // An error occurred.
         console.log(error);
