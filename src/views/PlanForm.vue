@@ -17,8 +17,8 @@
                 class="mb-5"
                 label="日付">
               </v-date-picker>
-              <v-select :items="parks" v-model="selectedPark" v-on:change="changedPark" label="PARK" required></v-select>
-              <v-select :items="shows" v-model="plan.show" item-text="name" item-value="id" v-on:change="changedShow" label="SHOW" required></v-select>
+              <v-select :items="parks" v-model="selectedPark" v-on:change="setPark" label="PARK" required></v-select>
+              <v-select :items="shows" v-model="plan.show" item-text="name" item-value="id" label="SHOW" required></v-select>
               <!-- <v-select :items="shows" v-model="plan.show" item-text="name" item-value="id" label="TIME" required></v-select> -->
               <div class="text-center mt-5">
                 <v-btn @click="$router.push({ name: 'plans' })">キャンセル</v-btn>
@@ -36,6 +36,7 @@
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
 import prefs from "../mixins/PrefsMixin.js";
+import showList from "../mixins/ShowsMixin.js";
 // import schedules from '../assets/show_schedule.json'
 
 export default {
@@ -48,6 +49,7 @@ export default {
     if (plan) {
       this.plan = plan;
     } else {
+      this.setPark();
       this.$router.push({ name: "plans" });
     }
   },
@@ -57,11 +59,11 @@ export default {
       selectedPark: 'a',
       selectedShow: 'iOS',
       parks: ['a','b'],
-      shows: [],
+      shows: showList.a,
       // schedules: schedules
     };
   },
-  mixins: [prefs],
+  mixins: [prefs,showList],
   methods: {
     submit() {
       this.$set(this.plan, 'twitter_id', this.$store.getters.login_user_twitter_id);
@@ -76,26 +78,24 @@ export default {
       this.$router.push({ name: "plans" });
       this.plan = {};
     },
-    changedPark() {
+    setPark() {
+      console.log('test');
       var tmp_shows = [];
       if (this.selectedPark == 'a') {
         tmp_shows = [
-          {id: 1, name: 'iOS'},
-          {id: 2, name: 'Android'},
-          {id: 3, name: 'FrontEnd'},
-          {id: 4, name: 'BackEnd'},
-          {id: 5, name: 'Server'},
+          {id: 1, name: 'A'},
+          {id: 2, name: 'B'},
+          {id: 3, name: 'C'},
+          {id: 4, name: 'D'},
+          {id: 5, name: 'E'},
         ]
       } else if (this.selectedPark == 'b') {
         tmp_shows = [
-          {id: 6, name: 'UI / UX'},
-          {id: 7, name: 'Tools'},
+          {id: 6, name: 'F'},
+          {id: 7, name: 'G'},
         ]
       }
       this.shows = tmp_shows;
-    },
-    changedShow() {
-
     },
     ...mapActions(["addPlan", "updatePlan"]),
     ...mapGetters(["login_user_twitter_id"])

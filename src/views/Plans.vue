@@ -16,8 +16,10 @@
       <v-flex xs12 mt-3 justify-center>
         <v-data-table :headers='headers' :items='plans'>
           <template v-slot:item.date="{ item }">
-            <!-- <span>{{item.date.toDate() | moment}}</span> -->
             <span>{{item.date}}</span>
+          </template>
+          <template v-slot:item.twitter_id="{ item }">
+            <span>@{{item.twitter_id}}</span>
           </template>
           <template v-slot:item.action="{ item }">
             <router-link :to="{ name: 'address_edit', params: { address_id: item.id }}">
@@ -66,6 +68,7 @@ export default {
       headers: [
         { text: "日時", value: "date" },
         { text: "ショー", value: "show" },
+        { text: "twitter", value: "twitter_id" },
         { text: "操作", value: "action", sortable: false }
       ],
       plans: []

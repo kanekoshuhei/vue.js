@@ -40,6 +40,9 @@ export default new Vuex.Store({
 
       state.addresses.splice(index, 1)
     },
+    clearPlan(state) {
+      state.plans = []
+    },
     addPlan(state, { id, plan }) {
       plan.id = id
       state.plans.push(plan)
@@ -63,6 +66,7 @@ export default new Vuex.Store({
       })
     },
     fetchPlans({ commit }) {
+      commit('clearPlan')
       firebase.firestore().collection(`plans`).get().then(snapshot => {
         snapshot.forEach(doc => commit('addPlan', { id: doc.id, plan: doc.data() }))
       })
@@ -112,6 +116,13 @@ export default new Vuex.Store({
       if (getters.uid) {
         firebase.firestore().collection(`plans`).add(plan).then(doc => {
           commit('addPlan', { id: doc.id, plan })
+        })
+      }
+    },
+    deletePlan({ getters, commit }, { id }) {
+      if (getters.uid) {
+        firebase.firestore().collection(`plans`).doc(id).delete().then(() => {
+          commit('deletePlan', { id })
         })
       }
     },
