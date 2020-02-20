@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
 
@@ -121,5 +122,6 @@ export default new Vuex.Store({
     uid: state => state.login_user ? state.login_user.uid : null,
     login_user_twitter_id: state => state.login_user ? state.login_user_twitter_id : null,
     getAddressById: state => id => state.addresses.find(address => address.id === id),
-  }
+  },
+  plugins: [createPersistedState()]
 })

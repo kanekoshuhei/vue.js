@@ -35,7 +35,7 @@ export default {
         this.fetchAddresses();
         this.fetchPlans();
         if (this.$router.currentRoute.name === "home") {
-          this.$router.push({ name: "addresses" });
+          this.$router.push({ name: "plans" });
         }
       } else {
         this.deleteLoginUser();

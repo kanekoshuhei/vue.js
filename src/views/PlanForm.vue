@@ -64,16 +64,13 @@ export default {
   mixins: [prefs],
   methods: {
     submit() {
-      console.log(this.$store);
       this.$set(this.plan, 'twitter_id', this.$store.getters.login_user_twitter_id);
-      console.log(this.plan);
       if (this.$route.params.plan_id) {
         this.updatePlan({
           id: this.$route.params.plan_id,
           plan: this.plan
         });
       } else {
-        console.log(this.plan);
         this.addPlan(this.plan);
       }
       this.$router.push({ name: "plans" });
