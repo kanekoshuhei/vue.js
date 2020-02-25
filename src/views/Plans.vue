@@ -34,34 +34,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 import moment from 'moment';
 
 export default {
   created() {
     this.plans = this.$store.state.plans;
-    // const Twitter = require("twitter");
-    // const functions = require('firebase-functions');
-    // const request = require('request-promise');
-
-    // var client = new Twitter({
-    //   consumer_key: "R2CcrNPC135ghEBsN1qcCXEAY",
-    //   consumer_secret: "L3W5hNxhm803V2hUwv0xJgkbPnbdIRaVrFmz6DAZ2vbrtN74Bp",
-    //   access_token_key:  "1123214806889013248-AO0K4ZWrrJ64VDRWFXHDWVMuYNeyWj",
-    //   access_token_secret: "wG7wlRAdYmjbJqhjEUOKCOHZYb4JxFa4EgN5X4jGfMmhu",
-    //   request_options: {
-    //     proxy: 'https://cors-anywhere.herokuapp.com/'
-    //   }
-    // })
-
-    // var params = {screen_name: 'TDR_PR','count': 5};
-    // client.get('statuses/user_timeline', params, function(error, tweets, response) {
-    //   if (!error) {
-    //     console.log(tweets);
-    //     console.log(response);
-    //   }
-    // });
-
   },
   data() {
     return {
