@@ -84,3 +84,62 @@ exports.topics = functions.https.onRequest((request, response) => {
     })
 })
 // [END Topics API trigger]
+
+// [START Twitter User API trigger]
+/**
+ * Twitter User API trigger
+ * HTTP リクエスト経由で関数を呼び出す
+ * @link https://firebase.google.com/docs/functions/http-events?hl=ja
+ */
+exports.user = functions.https.onRequest((request, response) => {
+    cors(request, response, () => {
+        compression(request, response, () => {
+            /**
+             * Twitter for Node.js
+             * @link https://www.npmjs.com/package/twitter
+             */
+            const TwitterClient = require('twitter')
+            /**
+             * Twitter Module
+             */
+            const TwitterModule = require('./modules/twitter-module')
+            /**
+             * A simple in-memory cache for node.js
+             * @link https://www.npmjs.com/package/memory-cache
+             */
+            const cache = require('memory-cache')
+
+            const twitterConf = config.twitter
+            const twitterModule = new TwitterModule(
+                new TwitterClient(twitterConf.credential),
+                cache)
+
+            let options = {}
+            // if('fav_list' in twitterConf) {
+            //     const favListConf = twitterConf.fav_list
+            //     if ('screen_name' in favListConf && favListConf.screen_name) {
+            //      options.screen_name = favListConf.screen_name
+            if (request.query.screen_name) {
+                options.screen_name = request.query.screen_name
+            }
+            //     }
+            // }
+
+            twitterModule.getUserObject(options, (result, error) => {
+                if (error) {
+                    response.status(500).json(error)
+                } else {
+                    /**
+                     *  Firebase - Cache-Control を設定する
+                     * @link https://firebase.google.com/docs/hosting/functions?hl=ja#set_cache_control
+                     */
+                    response
+                        .set('Cache-Control', 'public, max-age=300, s-maxage=600')
+                        .type('json')
+                        .status(200).json(result)
+                }
+            })
+        })
+    })
+})
+// [END Twitter User API trigger]

@@ -61,6 +61,37 @@ class TwitterModule {
             })
         }
     }
+
+    /**
+     * 対象 Twitter ユーザーの User object取得
+     * @link https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object
+     * @param {Object} options - 取得オプション
+     * @param {callback} callback
+     * @example
+     * options = {
+     *  screen_name: string - 対象ユーザーのスクリーンネーム
+     * }
+     */
+    getUserObject(options, callback) {
+        const cacheLifeTimeSec = 60 // 1 min
+        const apiPath = '/users/show.json'
+        const tweets = this.cache.get(apiPath)
+        if (tweets) {
+            return callback(tweets, false)
+        } else {
+            const self = this;
+            let requestParams = {}
+            if ('screen_name' in options) {
+                requestParams.screen_name = options.screen_name
+            }
+            this.client.get(apiPath, requestParams, (error, tweets, response) => {
+                if (tweets) {
+                    self.cache.put(apiPath, tweets, cacheLifeTimeSec * 1000)
+                }
+                return callback(tweets, error)
+            })
+        }
+    }
 }
 
 module.exports = TwitterModule
