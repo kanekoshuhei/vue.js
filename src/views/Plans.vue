@@ -21,6 +21,9 @@
           <template v-slot:item.twitter_id="{ item }">
             <span>@{{item.twitter_id}}</span>
           </template>
+          <template v-slot:item.profile_image_url="{ item }">
+            <v-img class="profile_img" :src="item.profile_image_url"></v-img>
+          </template>
           <template v-slot:item.action="{ item }">
             <router-link :to="{ name: 'address_edit', params: { address_id: item.id }}">
               <v-icon small class="mr-2">mdi-pencil</v-icon>
@@ -47,6 +50,7 @@ export default {
         { text: "日時", value: "date" },
         { text: "ショー", value: "show" },
         { text: "twitter", value: "twitter_id" },
+        { text: "twitter_img", value: "profile_image_url"},
         { text: "操作", value: "action", sortable: false }
       ],
       plans: []
@@ -71,5 +75,8 @@ export default {
 <style scoped lang="scss">
 a {
   text-decoration: none;
+}
+.profile_img {
+  width: 30px;
 }
 </style>

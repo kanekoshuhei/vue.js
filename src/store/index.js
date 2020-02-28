@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
 import 'firebase/firestore';
+import axios from 'axios';
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
@@ -69,7 +70,15 @@ export default new Vuex.Store({
     fetchPlans({ commit }) {
       commit('clearPlan')
       firebase.firestore().collection(`plans`).get().then(snapshot => {
-        snapshot.forEach(doc => commit('addPlan', { id: doc.id, plan: doc.data() }))
+        snapshot.forEach(doc => {
+          var doc_data = doc.data();
+          axios.get('http://localhost:5000/tsukkomi-de7ed/us-central1/user?screen_name=' + doc.data().twitter_id)
+          .then(response => {
+            Vue.set(doc_data, 'profile_image_url', response.data.profile_image_url);
+            commit('addPlan', { id: doc.id, plan: doc_data }) ;
+          })
+          .catch(response => console.log(response));
+        })
       })
     },
     login({ commit }) {
