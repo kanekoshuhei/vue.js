@@ -143,6 +143,7 @@ export default new Vuex.Store({
     uid: state => state.login_user ? state.login_user.uid : null,
     login_user_twitter_id: state => state.login_user ? state.login_user_twitter_id : null,
     getAddressById: state => id => state.addresses.find(address => address.id === id),
+    getPlanById: state => id => state.plans.find(plan => plan.id === id),
   },
   plugins: [createPersistedState()]
 })

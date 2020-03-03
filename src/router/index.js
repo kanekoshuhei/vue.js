@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Addresses from '../views/Addresses.vue'
 import AddressForm from '../views/AddressForm.vue'
 import Plans from '../views/Plans.vue'
+import Plan from '../views/Plan.vue'
 import PlanForm from '../views/PlanForm.vue'
 
 Vue.use(VueRouter)
@@ -28,6 +29,11 @@ const routes = [
     path: '/plans',
     name: 'plans',
     component: Plans
+  },
+  {
+    path: '/plans/:plan_id?',
+    name: 'plan',
+    component: Plan
   },
   {
     path: '/plans/:plan_id?/edit',

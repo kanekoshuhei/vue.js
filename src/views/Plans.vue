@@ -14,15 +14,15 @@
       </v-flex>
 
       <v-flex xs12 mt-3 justify-center>
-        <v-data-table :headers='headers' :items='plans'>
+        <v-data-table :headers='headers' :items='plans' :custom-filter="filter" @click:row="onClickEvent">
           <template v-slot:item.date="{ item }">
             <span>{{item.date}}</span>
           </template>
           <template v-slot:item.twitter_id="{ item }">
-            <span>@{{item.twitter_id}}</span>
-          </template>
-          <template v-slot:item.profile_image_url="{ item }">
-            <v-img class="profile_img" :src="item.profile_image_url"></v-img>
+            <a :href="twitter_url + item.twitter_id" >
+              <v-avatar size="40px"><img class="profile_img mr-1" :src="item.profile_image_url"></v-avatar>
+              <span>@{{item.twitter_id}}</span>
+            </a>
           </template>
           <template v-slot:item.action="{ item }">
             <router-link :to="{ name: 'address_edit', params: { address_id: item.id }}">
@@ -50,10 +50,10 @@ export default {
         { text: "日時", value: "date" },
         { text: "ショー", value: "show" },
         { text: "twitter", value: "twitter_id" },
-        { text: "twitter_img", value: "profile_image_url"},
         { text: "操作", value: "action", sortable: false }
       ],
-      plans: []
+      plans: [],
+      twitter_url: "https://twitter.com/",
     };
   },
   filters: {
@@ -62,6 +62,12 @@ export default {
     }
   },
   methods: {
+    filter(val, search) {
+      return val === search;
+    },
+    onClickEvent(data) {
+      this.$router.push({ name: 'plan', params: { plan_id: data.id }});
+    },
     deleteConfirm (id) {
       if (confirm('削除してよろしいですか？')) {
         this.deletePlan({ id })
@@ -75,8 +81,5 @@ export default {
 <style scoped lang="scss">
 a {
   text-decoration: none;
-}
-.profile_img {
-  width: 30px;
 }
 </style>
