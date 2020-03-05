@@ -6,6 +6,19 @@
       </v-flex>
 
       <v-flex mt-5>
+        <v-snackbar
+          v-model="snackbar"
+          :timeout="timeout"
+        >
+          {{ text }}
+          <v-btn
+            color="blue"
+            text
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </v-snackbar>
         <v-card>
           <v-card-text>
             <v-form>
@@ -14,7 +27,7 @@
               <p>{{ plan.twitter_id }}</p>
               <div class="text-center mt-5">
                 <v-btn @click="$router.push({ name: 'plans' })">キャンセル</v-btn>
-                <v-btn color="info" class="ml-2" @click="submit">保存</v-btn>
+                <v-btn color="info" class="ml-2" @click="submit">リクエスト</v-btn>
               </div>
             </v-form>
           </v-card-text>
@@ -27,7 +40,6 @@
 <script>
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
-import showList from '../assets/shows.json';
 
 export default {
   created() {
@@ -39,44 +51,32 @@ export default {
     if (plan) {
       this.plan = plan;
     } else {
-      this.setPark();
       this.$router.push({ name: "plans" });
     }
   },
   data() {
     return {
       plan: {},
-      selectedPark: 'a',
-      parks: ['a','b'],
-      shows: showList.A,
-      // schedules: schedules
+      planRequest: {},
+      snackbar: false,
+      text: 'My timeout is set to 2000.',
+      timeout: 2000,
     };
   },
   methods: {
     submit() {
-      this.$set(this.plan, 'twitter_id', this.$store.getters.login_user_twitter_id);
       if (this.$route.params.plan_id) {
-        this.updatePlan({
-          id: this.$route.params.plan_id,
-          plan: this.plan
+        this.addPlanRequest({
+          user_id: this.$store.getters.uid,
+          plan_id: this.$route.params.plan_id
         });
-      } else {
-        this.addPlan(this.plan);
+        snackbar = true;
       }
-      this.$router.push({ name: "plans" });
+      ;
       this.plan = {};
     },
-    setPark() {
-      var tmp_shows = [];
-      if (this.selectedPark == 'a') {
-        tmp_shows = showList.A
-      } else if (this.selectedPark == 'b') {
-        tmp_shows = showList.B
-      }
-      this.shows = tmp_shows;
-    },
-    ...mapActions(["addPlan", "updatePlan"]),
-    ...mapGetters(["login_user_twitter_id"])
+    ...mapActions(["addPlanRequest"]),
+    ...mapGetters(["uid"])
   }
 };
 </script>

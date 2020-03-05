@@ -136,6 +136,17 @@ export default new Vuex.Store({
         })
       }
     },
+    addPlanRequest({ getters }, plan_request) {
+      if (getters.uid) {
+        firebase.firestore().collection(`plan_requests`).add(plan_request)
+        .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function(error) {
+          console.error("Error adding document: ", error);
+        });
+      }
+    }
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',

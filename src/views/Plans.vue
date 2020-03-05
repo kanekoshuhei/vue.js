@@ -25,10 +25,15 @@
             </a>
           </template>
           <template v-slot:item.action="{ item }">
-            <router-link :to="{ name: 'address_edit', params: { address_id: item.id }}">
-              <v-icon small class="mr-2">mdi-pencil</v-icon>
+            <router-link :to="{ name: 'plan', params: { plan_id: item.id }}">
+              <v-btn class="mx-2" fab small color="primary">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
             </router-link>
-            <v-icon small class="mr-2" @click="deleteConfirm(item.id)">mdi-delete</v-icon>
+            <!-- <router-link :to="{ name: 'address_edit', params: { address_id: item.id }}">
+              <v-icon small class="mr-2">mdi-pencil</v-icon>
+            </router-link> -->
+            <!-- <v-icon small class="mr-2" @click="deleteConfirm(item.id)">mdi-delete</v-icon> -->
           </template>
         </v-data-table>
       </v-flex>
@@ -50,10 +55,12 @@ export default {
         { text: "日時", value: "date" },
         { text: "ショー", value: "show" },
         { text: "twitter", value: "twitter_id" },
-        { text: "操作", value: "action", sortable: false }
+        { text: "詳細", value: "action", sortable: false }
       ],
       plans: [],
       twitter_url: "https://twitter.com/",
+      loader: null,
+      loading: false,
     };
   },
   filters: {
@@ -74,6 +81,16 @@ export default {
       }
     },
     ...mapActions(['deletePlan'])
+  },
+  watch: {
+    loader () {
+      const l = this.loader
+      this[l] = !this[l]
+
+      setTimeout(() => (this[l] = false), 3000)
+
+      this.loader = null
+      }
   }
 };
 </script>
