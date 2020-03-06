@@ -146,6 +146,16 @@ export default new Vuex.Store({
             console.error("Error adding document: ", error);
           });
       }
+    },
+    getPlanRequest({ getters }, user_id, plan_id) {
+      if (getters.uid) {
+        firebase.firestore().collection(`plan_requests`)
+          .where("user_id", "==", user_id)
+          .where("plan_id", "==", plan_id)
+          .get().then(() => {
+
+          })
+      }
     }
   },
   getters: {

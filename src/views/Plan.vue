@@ -35,7 +35,7 @@ import { mapGetters } from "vuex";
 export default {
   created() {
     if (!this.$route.params.plan_id) return;
-
+    this.getPlanRequest(this.$store.getters.uid, this.$route.params.plan_id);
     const plan = this.$store.getters.getPlanById(this.$route.params.plan_id);
     if (plan) {
       this.plan = plan;
@@ -48,7 +48,7 @@ export default {
       plan: {},
       planRequest: {},
       snackbar: false,
-      text: "My timeout is set to 2000.",
+      text: "リクエストが完了しました。",
       timeout: 2000
     };
   },
@@ -61,9 +61,8 @@ export default {
         });
         snackbar = true;
       }
-      this.plan = {};
     },
-    ...mapActions(["addPlanRequest"]),
+    ...mapActions(["getPlanRequest", "addPlanRequest"]),
     ...mapGetters(["uid"])
   }
 };
