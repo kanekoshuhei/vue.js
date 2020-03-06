@@ -73,11 +73,11 @@ export default new Vuex.Store({
         snapshot.forEach(doc => {
           var doc_data = doc.data();
           axios.get('http://localhost:5000/tsukkomi-de7ed/us-central1/user?screen_name=' + doc.data().twitter_id)
-          .then(response => {
-            Vue.set(doc_data, 'profile_image_url', response.data.profile_image_url);
-            commit('addPlan', { id: doc.id, plan: doc_data }) ;
-          })
-          .catch(response => console.log(response));
+            .then(response => {
+              Vue.set(doc_data, 'profile_image_url', response.data.profile_image_url);
+              commit('addPlan', { id: doc.id, plan: doc_data });
+            })
+            .catch(response => console.log(response));
         })
       })
     },
@@ -139,12 +139,12 @@ export default new Vuex.Store({
     addPlanRequest({ getters }, plan_request) {
       if (getters.uid) {
         firebase.firestore().collection(`plan_requests`).add(plan_request)
-        .then(function(docRef) {
-          console.log("Document written with ID: ", docRef.id);
-        })
-        .catch(function(error) {
-          console.error("Error adding document: ", error);
-        });
+          .then(function (docRef) {
+            console.log("Document written with ID: ", docRef.id);
+          })
+          .catch(function (error) {
+            console.error("Error adding document: ", error);
+          });
       }
     }
   },

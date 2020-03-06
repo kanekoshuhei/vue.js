@@ -6,18 +6,9 @@
       </v-flex>
 
       <v-flex mt-5>
-        <v-snackbar
-          v-model="snackbar"
-          :timeout="timeout"
-        >
+        <v-snackbar v-model="snackbar" :timeout="timeout">
           {{ text }}
-          <v-btn
-            color="blue"
-            text
-            @click="snackbar = false"
-          >
-            Close
-          </v-btn>
+          <v-btn color="blue" text @click="snackbar = false">Close</v-btn>
         </v-snackbar>
         <v-card>
           <v-card-text>
@@ -45,9 +36,7 @@ export default {
   created() {
     if (!this.$route.params.plan_id) return;
 
-    const plan = this.$store.getters.getPlanById(
-      this.$route.params.plan_id
-    );
+    const plan = this.$store.getters.getPlanById(this.$route.params.plan_id);
     if (plan) {
       this.plan = plan;
     } else {
@@ -59,8 +48,8 @@ export default {
       plan: {},
       planRequest: {},
       snackbar: false,
-      text: 'My timeout is set to 2000.',
-      timeout: 2000,
+      text: "My timeout is set to 2000.",
+      timeout: 2000
     };
   },
   methods: {
@@ -72,7 +61,6 @@ export default {
         });
         snackbar = true;
       }
-      ;
       this.plan = {};
     },
     ...mapActions(["addPlanRequest"]),

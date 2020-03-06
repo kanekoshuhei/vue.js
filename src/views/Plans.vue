@@ -7,20 +7,25 @@
 
       <v-flex xs12 mt-5 mr-5 text-right>
         <router-link :to="{ name: 'plan_edit' }">
-          <v-btn color="info">
-            追加
-          </v-btn>
+          <v-btn color="info">追加</v-btn>
         </router-link>
       </v-flex>
 
       <v-flex xs12 mt-3 justify-center>
-        <v-data-table :headers='headers' :items='plans' :custom-filter="filter" @click:row="onClickEvent">
+        <v-data-table
+          :headers="headers"
+          :items="plans"
+          :custom-filter="filter"
+          @click:row="onClickEvent"
+        >
           <template v-slot:item.date="{ item }">
             <span>{{item.date}}</span>
           </template>
           <template v-slot:item.twitter_id="{ item }">
-            <a :href="twitter_url + item.twitter_id" >
-              <v-avatar size="40px"><img class="profile_img mr-1" :src="item.profile_image_url"></v-avatar>
+            <a :href="twitter_url + item.twitter_id">
+              <v-avatar size="40px">
+                <img class="profile_img mr-1" :src="item.profile_image_url" />
+              </v-avatar>
               <span>@{{item.twitter_id}}</span>
             </a>
           </template>
@@ -32,7 +37,7 @@
             </router-link>
             <!-- <router-link :to="{ name: 'address_edit', params: { address_id: item.id }}">
               <v-icon small class="mr-2">mdi-pencil</v-icon>
-            </router-link> -->
+            </router-link>-->
             <!-- <v-icon small class="mr-2" @click="deleteConfirm(item.id)">mdi-delete</v-icon> -->
           </template>
         </v-data-table>
@@ -42,8 +47,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import moment from 'moment';
+import { mapActions } from "vuex";
+import moment from "moment";
 
 export default {
   created() {
@@ -60,12 +65,12 @@ export default {
       plans: [],
       twitter_url: "https://twitter.com/",
       loader: null,
-      loading: false,
+      loading: false
     };
   },
   filters: {
-    moment: function (date) {
-        return moment(date).format('YYYY年MM月DD日 HH:mm');
+    moment: function(date) {
+      return moment(date).format("YYYY年MM月DD日 HH:mm");
     }
   },
   methods: {
@@ -73,24 +78,24 @@ export default {
       return val === search;
     },
     onClickEvent(data) {
-      this.$router.push({ name: 'plan', params: { plan_id: data.id }});
+      this.$router.push({ name: "plan", params: { plan_id: data.id } });
     },
-    deleteConfirm (id) {
-      if (confirm('削除してよろしいですか？')) {
-        this.deletePlan({ id })
+    deleteConfirm(id) {
+      if (confirm("削除してよろしいですか？")) {
+        this.deletePlan({ id });
       }
     },
-    ...mapActions(['deletePlan'])
+    ...mapActions(["deletePlan"])
   },
   watch: {
-    loader () {
-      const l = this.loader
-      this[l] = !this[l]
+    loader() {
+      const l = this.loader;
+      this[l] = !this[l];
 
-      setTimeout(() => (this[l] = false), 3000)
+      setTimeout(() => (this[l] = false), 3000);
 
-      this.loader = null
-      }
+      this.loader = null;
+    }
   }
 };
 </script>

@@ -15,9 +15,15 @@
                 locale="jp-ja"
                 :day-format="date => new Date(date).getDate()"
                 class="mb-5"
-                label="日付">
-              </v-date-picker>
-              <v-select :items="parks" v-model="selectedPark" v-on:change="setPark" label="PARK" required></v-select>
+                label="日付"
+              ></v-date-picker>
+              <v-select
+                :items="parks"
+                v-model="selectedPark"
+                v-on:change="setPark"
+                label="PARK"
+                required
+              ></v-select>
               <v-select :items="shows" v-model="plan.show" label="SHOW" required></v-select>
               <!-- <v-select :items="shows" v-model="plan.show" item-text="name" item-value="id" label="TIME" required></v-select> -->
               <div class="text-center mt-5">
@@ -35,15 +41,13 @@
 <script>
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
-import showList from '../assets/shows.json';
+import showList from "../assets/shows.json";
 
 export default {
   created() {
     if (!this.$route.params.plan_id) return;
 
-    const plan = this.$store.getters.getPlanById(
-      this.$route.params.plan_id
-    );
+    const plan = this.$store.getters.getPlanById(this.$route.params.plan_id);
     if (plan) {
       this.plan = plan;
     } else {
@@ -54,15 +58,19 @@ export default {
   data() {
     return {
       plan: {},
-      selectedPark: 'a',
-      parks: ['a','b'],
-      shows: showList.A,
+      selectedPark: "a",
+      parks: ["a", "b"],
+      shows: showList.A
       // schedules: schedules
     };
   },
   methods: {
     submit() {
-      this.$set(this.plan, 'twitter_id', this.$store.getters.login_user_twitter_id);
+      this.$set(
+        this.plan,
+        "twitter_id",
+        this.$store.getters.login_user_twitter_id
+      );
       if (this.$route.params.plan_id) {
         this.updatePlan({
           id: this.$route.params.plan_id,
@@ -76,10 +84,10 @@ export default {
     },
     setPark() {
       var tmp_shows = [];
-      if (this.selectedPark == 'a') {
-        tmp_shows = showList.A
-      } else if (this.selectedPark == 'b') {
-        tmp_shows = showList.B
+      if (this.selectedPark == "a") {
+        tmp_shows = showList.A;
+      } else if (this.selectedPark == "b") {
+        tmp_shows = showList.B;
       }
       this.shows = tmp_shows;
     },
