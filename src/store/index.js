@@ -147,24 +147,15 @@ export default new Vuex.Store({
           });
       }
     },
-    getPlanRequest({ getters }, user_id, plan_id) {
-      if (getters.uid) {
-        firebase.firestore().collection(`plan_requests`)
-          .where("user_id", "==", user_id)
-          .where("plan_id", "==", plan_id)
-          .get().then(() => {
-
-          })
-      }
-    }
   },
+
   getters: {
-    userName: state => state.login_user ? state.login_user.displayName : '',
-    photoURL: state => state.login_user ? state.login_user.photoURL : '',
-    uid: state => state.login_user ? state.login_user.uid : null,
-    login_user_twitter_id: state => state.login_user ? state.login_user_twitter_id : null,
-    getAddressById: state => id => state.addresses.find(address => address.id === id),
-    getPlanById: state => id => state.plans.find(plan => plan.id === id),
+  userName: state => state.login_user ? state.login_user.displayName : '',
+  photoURL: state => state.login_user ? state.login_user.photoURL : '',
+  uid: state => state.login_user ? state.login_user.uid : null,
+  login_user_twitter_id: state => state.login_user ? state.login_user_twitter_id : null,
+  getAddressById: state => id => state.addresses.find(address => address.id === id),
+  getPlanById: state => id => state.plans.find(plan => plan.id === id),
   },
   plugins: [createPersistedState()]
 })

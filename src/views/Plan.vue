@@ -18,7 +18,7 @@
               <p>{{ plan.twitter_id }}</p>
               <div class="text-center mt-5">
                 <v-btn @click="$router.push({ name: 'plans' })">キャンセル</v-btn>
-                <v-btn color="info" class="ml-2" @click="submit">リクエスト</v-btn>
+                <v-btn v-bind:disabled="disableRequestBtn" color="info" class="ml-2" @click="submit">リクエスト</v-btn>
               </div>
             </v-form>
           </v-card-text>
@@ -31,17 +31,19 @@
 <script>
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
+import firebase from 'firebase'
+import 'firebase/firestore';
 
 export default {
-  created() {
+  async created() {
     if (!this.$route.params.plan_id) return;
-    this.getPlanRequest(this.$store.getters.uid, this.$route.params.plan_id);
     const plan = this.$store.getters.getPlanById(this.$route.params.plan_id);
     if (plan) {
       this.plan = plan;
     } else {
       this.$router.push({ name: "plans" });
     }
+    this.disableRequestBtn = await this.existsPlanRequest(this.$store.getters.uid, this.$route.params.plan_id);
   },
   data() {
     return {
@@ -49,8 +51,12 @@ export default {
       planRequest: {},
       snackbar: false,
       text: "リクエストが完了しました。",
-      timeout: 2000
+      timeout: 2000,
+      disableRequestBtn: false
     };
+  },
+  computed: {
+    
   },
   methods: {
     submit() {
@@ -59,10 +65,20 @@ export default {
           user_id: this.$store.getters.uid,
           plan_id: this.$route.params.plan_id
         });
+        this.disableRequestBtn = false;
         snackbar = true;
       }
     },
-    ...mapActions(["getPlanRequest", "addPlanRequest"]),
+    async existsPlanRequest(user_id, plan_id) {
+      await firebase.firestore().collection(`plan_requests`)
+        .where("user_id", "==", user_id)
+        .where("plan_id", "==", plan_id).get().then(snapshot => {
+          snapshot.forEach(doc => {
+            return doc.exists;
+          })
+        });
+    },
+    ...mapActions(["addPlanRequest"]),
     ...mapGetters(["uid"])
   }
 };
