@@ -1,16 +1,6 @@
 <template>
   <v-container text-xs-center justify-center>
     <v-layout row wrap>
-      <v-flex xs12>
-        <h1>一覧</h1>
-      </v-flex>
-
-      <v-flex xs12 mt-5 mr-5 text-right>
-        <router-link :to="{ name: 'plan_edit' }">
-          <v-btn color="info">追加</v-btn>
-        </router-link>
-      </v-flex>
-
       <v-flex xs12 mt-3 justify-center>
         <v-data-table
           :headers="headers"
@@ -23,7 +13,7 @@
           </template>
           <template v-slot:item.twitter_id="{ item }">
             <a :href="twitter_url + item.twitter_id">
-              <v-avatar size="40px">
+              <v-avatar size="36px">
                 <img class="profile_img mr-1" :src="item.profile_image_url" />
               </v-avatar>
               <span>@{{item.twitter_id}}</span>
@@ -31,7 +21,7 @@
           </template>
           <template v-slot:item.action="{ item }">
             <router-link :to="{ name: 'plan', params: { plan_id: item.id }}">
-              <v-btn class="mx-2" fab small color="primary">
+              <v-btn class="mx-2" fab small depressed color="primary">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
             </router-link>

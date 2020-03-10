@@ -1,14 +1,22 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <v-app-bar-nav-icon v-show="$store.state.login_user" @click.stop="toggleSideMenu"></v-app-bar-nav-icon>
+    <v-app-bar app dark depressed>
+      <!-- <v-app-bar-nav-icon v-show="$store.state.login_user" @click.stop="toggleSideMenu"></v-app-bar-nav-icon> -->
       <v-toolbar-title>test</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items v-if="$store.state.login_user">
+      <v-avatar size="36px">
+        <img v-if="photoURL" :src="photoURL" />
+      </v-avatar>
+      <router-link :to="{ name: 'plan_edit' }">
+        <v-btn small depressed color="secondary ml-2">
+          <v-icon small>{{ icons.mdiPencil }}</v-icon>追加
+        </v-btn>
+      </router-link>
+      <!-- <v-toolbar-items v-if="$store.state.login_user">
         <v-btn text @click="logout">ログアウト</v-btn>
-      </v-toolbar-items>
+      </v-toolbar-items>-->
     </v-app-bar>
-    <SideNav />
+    <!-- <SideNav /> -->
 
     <v-content>
       <v-container fluid fill-height align-start>
@@ -20,13 +28,15 @@
 
 <script>
 import firebase from "firebase";
-import SideNav from "./components/SideNav";
+// import SideNav from "./components/SideNav";
 import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
+import { mdiAccount, mdiPencil, mdiShareVariant, mdiDelete } from "@mdi/js";
 
 export default {
   name: "App",
   components: {
-    SideNav
+    // SideNav
   },
   created() {
     firebase.auth().onAuthStateChanged(user => {
@@ -44,7 +54,12 @@ export default {
     });
   },
   data: () => ({
-    //
+    icons: {
+      mdiAccount,
+      mdiPencil,
+      mdiShareVariant,
+      mdiDelete
+    }
   }),
   methods: {
     ...mapActions([
@@ -55,6 +70,9 @@ export default {
       "fetchAddresses",
       "fetchPlans"
     ])
+  },
+  computed: {
+    ...mapGetters(["userName", "photoURL"])
   }
 };
 </script>
