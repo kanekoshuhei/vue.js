@@ -69,6 +69,10 @@ export default {
     },
     onClickEvent(data) {
       this.$router.push({ name: "plan", params: { plan_id: data.id } });
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     },
     deleteConfirm(id) {
       if (confirm("削除してよろしいですか？")) {

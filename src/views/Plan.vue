@@ -1,10 +1,6 @@
 <template>
   <v-container text-xs-center>
     <v-layout row wrap justify-center>
-      <v-flex xs12 class="text-center">
-        <h1>test</h1>
-      </v-flex>
-
       <v-flex mt-5>
         <v-snackbar v-model="snackbar" :timeout="timeout">
           {{ request_complete_text }}
