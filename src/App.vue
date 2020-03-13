@@ -4,14 +4,14 @@
       <!-- <v-app-bar-nav-icon v-show="$store.state.login_user" @click.stop="toggleSideMenu"></v-app-bar-nav-icon> -->
       <v-toolbar-title>test</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-avatar size="36px" @click.stop="toggleSideMenu">
-        <img v-if="photoURL" :src="photoURL" />
-      </v-avatar>
       <router-link :to="{ name: 'plan_edit' }">
-        <v-btn small depressed color="secondary ml-2">
+        <v-btn small depressed color="secondary">
           <v-icon small>{{ icons.mdiPencil }}</v-icon>追加
         </v-btn>
       </router-link>
+      <v-avatar size="36px" class="ml-2" @click.stop="toggleSideMenu">
+        <img v-if="photoURL" :src="photoURL" />
+      </v-avatar>
       <!-- <v-toolbar-items v-if="$store.state.login_user">
         <v-btn text @click="logout">ログアウト</v-btn>
       </v-toolbar-items>-->

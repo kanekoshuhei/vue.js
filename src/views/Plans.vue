@@ -1,6 +1,7 @@
 <template>
-  <v-container text-xs-center justify-center>
-    <v-layout row wrap>
+  <!-- <v-container text-xs-center justify-center fluid grid-list-md> -->
+  <v-container fluid>
+    <!-- <v-layout row wrap>
       <v-flex xs12 mt-3 justify-center>
         <v-data-table
           :headers="headers"
@@ -24,15 +25,64 @@
               <v-btn class="mx-2" fab small depressed color="primary">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
-            </router-link>
+            </router-link> -->
             <!-- <router-link :to="{ name: 'address_edit', params: { address_id: item.id }}">
               <v-icon small class="mr-2">mdi-pencil</v-icon>
             </router-link>-->
             <!-- <v-icon small class="mr-2" @click="deleteConfirm(item.id)">mdi-delete</v-icon> -->
-          </template>
+          <!-- </template>
         </v-data-table>
       </v-flex>
-    </v-layout>
+    </v-layout> -->
+    <v-data-iterator
+      :items="plans"
+      :items-per-page.sync="itemsPerPage"
+      hide-default-footer
+    >
+      <template v-slot:default="props">
+        <v-row>
+          <v-col
+            v-for="item in props.items"
+            :key="item.name"
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
+          >
+            <v-card @click="onClickEvent(item)">
+              <v-card-title class="subheading font-weight-bold">
+                <a :href="twitter_url + item.twitter_id">
+                  <v-avatar>
+                    <img class="profile_img mr-1" :src="item.profile_image_url" />
+                  </v-avatar>
+                  <span>@{{item.twitter_id}}</span>
+                </a>
+              </v-card-title>
+
+              <v-divider></v-divider>
+
+              <v-list dense>
+                <v-list-item>
+                  <v-list-item-content>日時:</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.date }}</v-list-item-content>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-content>ショー:</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.show }}</v-list-item-content>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-content>twitter_id:</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.twitter_id }}</v-list-item-content>
+                </v-list-item>
+
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+      </template>
+    </v-data-iterator>
   </v-container>
 </template>
 
@@ -55,7 +105,7 @@ export default {
       plans: [],
       twitter_url: "https://twitter.com/",
       loader: null,
-      loading: false
+      itemsPerPage: 12,
     };
   },
   filters: {
