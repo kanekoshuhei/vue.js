@@ -74,6 +74,7 @@ export default new Vuex.Store({
           var doc_data = doc.data();
           axios.get('http://localhost:5000/tsukkomi-de7ed/us-central1/user?screen_name=' + doc.data().twitter_id)
             .then(response => {
+              Vue.set(doc_data, 'user_name', response.data.name);
               Vue.set(doc_data, 'profile_image_url', response.data.profile_image_url);
               commit('addPlan', { id: doc.id, plan: doc_data });
             })
@@ -150,12 +151,12 @@ export default new Vuex.Store({
   },
 
   getters: {
-  userName: state => state.login_user ? state.login_user.displayName : '',
-  photoURL: state => state.login_user ? state.login_user.photoURL : '',
-  uid: state => state.login_user ? state.login_user.uid : null,
-  login_user_twitter_id: state => state.login_user ? state.login_user_twitter_id : null,
-  getAddressById: state => id => state.addresses.find(address => address.id === id),
-  getPlanById: state => id => state.plans.find(plan => plan.id === id),
+    userName: state => state.login_user ? state.login_user.displayName : '',
+    photoURL: state => state.login_user ? state.login_user.photoURL : '',
+    uid: state => state.login_user ? state.login_user.uid : null,
+    login_user_twitter_id: state => state.login_user ? state.login_user_twitter_id : null,
+    getAddressById: state => id => state.addresses.find(address => address.id === id),
+    getPlanById: state => id => state.plans.find(plan => plan.id === id),
   },
   plugins: [createPersistedState()]
 })

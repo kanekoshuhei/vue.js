@@ -41,10 +41,10 @@
             <v-card @click="onClickEvent(item)">
               <v-card-title class="subheading font-weight-bold">
                 <a :href="twitter_url + item.twitter_id">
-                  <v-avatar>
-                    <img class="profile_img mr-1" :src="item.profile_image_url" />
+                  <v-avatar class="mr-3">
+                    <img class="profile_img" :src="item.profile_image_url" />
                   </v-avatar>
-                  <span>@{{item.twitter_id}}</span>
+                  <span>{{item.user_name}}</span>
                 </a>
               </v-card-title>
 
@@ -53,14 +53,14 @@
               <v-list dense>
                 <v-list-item>
                   <v-list-item-content>
-                    <v-icon>event_note</v-icon>日時
+                    <v-icon>event_note</v-icon>
                   </v-list-item-content>
                   <v-list-item-content class="align-end">{{ item.date }}</v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
                   <v-list-item-content>
-                    <v-icon>flag</v-icon>ショー
+                    <v-icon>flag</v-icon>
                   </v-list-item-content>
                   <v-list-item-content class="align-end">{{ item.show }}</v-list-item-content>
                 </v-list-item>
@@ -83,6 +83,7 @@
 <script>
 import { mapActions } from "vuex";
 import moment from "moment";
+import { mapGetters } from "vuex";
 
 export default {
   created() {
@@ -101,6 +102,9 @@ export default {
       loader: null,
       itemsPerPage: 12
     };
+  },
+  computed: {
+    ...mapGetters(["userName"])
   },
   filters: {
     moment: function(date) {

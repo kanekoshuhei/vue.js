@@ -6,6 +6,7 @@ import AddressForm from '../views/AddressForm.vue'
 import Plans from '../views/Plans.vue'
 import Plan from '../views/Plan.vue'
 import PlanForm from '../views/PlanForm.vue'
+import MyPage from '../views/MyPage.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/plans/:plan_id?/edit',
     name: 'plan_edit',
     component: PlanForm
+  },
+  {
+    path: '/mypage',
+    name: 'mypage',
+    component: MyPage
   },
 ]
 
