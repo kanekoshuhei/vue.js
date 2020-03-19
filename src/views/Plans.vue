@@ -34,6 +34,10 @@
         </v-data-table>
       </v-flex>
     </v-layout>-->
+    <v-row justify="space-around">
+      <v-switch inset v-model="ll" class="mx-2" label="L" color="error"></v-switch>
+      <v-switch inset v-model="ss" class="mx-2" label="S" color="info"></v-switch>
+    </v-row>
     <v-data-iterator :items="plans" :items-per-page.sync="itemsPerPage" hide-default-footer>
       <template v-slot:default="props">
         <v-row>
@@ -41,7 +45,7 @@
             <v-card @click="onClickEvent(item)">
               <v-card-title class="subheading font-weight-bold">
                 <a :href="twitter_url + item.twitter_id">
-                  <v-avatar class="mr-3">
+                  <v-avatar>
                     <img class="profile_img" :src="item.profile_image_url" />
                   </v-avatar>
                   <span>{{item.user_name}}</span>
@@ -87,7 +91,19 @@ import { mapGetters } from "vuex";
 
 export default {
   created() {
-    this.plans = this.$store.state.plans;
+    var ll = this.ll;
+    var ss = this.ss;
+    this.plans = this.$store.state.plans.filter(function(plan) {
+      if (ll && ss) {
+        return true;
+      } else if (ll) {
+        return true;
+      } else if (ss) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   },
   data() {
     return {
@@ -97,6 +113,8 @@ export default {
         { text: "twitter", value: "twitter_id" },
         { text: "詳細", value: "action", sortable: false }
       ],
+      ll: true,
+      ss: true,
       plans: [],
       twitter_url: "https://twitter.com/",
       loader: null,

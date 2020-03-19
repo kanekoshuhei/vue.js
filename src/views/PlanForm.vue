@@ -26,7 +26,7 @@
               ></v-select>
               <v-select :items="shows" v-model="plan.show" label="SHOW" required></v-select>
               <!-- <v-select :items="shows" v-model="plan.show" item-text="name" item-value="id" label="TIME" required></v-select> -->
-              <v-textarea class="mx-2" label="メッセージ" rows="1"></v-textarea>
+              <v-textarea v-model="plan.message" label="メッセージ" rows="1"></v-textarea>
               <div class="text-center mt-5">
                 <v-btn @click="$router.push({ name: 'plans' })">キャンセル</v-btn>
                 <v-btn color="info" class="ml-2" @click="submit">保存</v-btn>

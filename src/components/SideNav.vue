@@ -20,11 +20,20 @@
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+      <v-list-item @click="logout">
+        <v-list-item-icon>
+          <v-icon>mdi-logout</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>ログアウト</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
 
 export default {
@@ -34,6 +43,9 @@ export default {
         { title: "プラン一覧", icon: "mdi-menu", link: { name: "plans" } }
       ]
     };
+  },
+  methods: {
+    ...mapActions(["logout"])
   },
   computed: {
     ...mapGetters(["userName", "photoURL"])

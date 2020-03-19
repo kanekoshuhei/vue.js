@@ -85,13 +85,14 @@ export default new Vuex.Store({
     login({ commit }) {
       const twitter_auth_provider = new firebase.auth.TwitterAuthProvider()
       // const google_auth_provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithPopup(twitter_auth_provider).then((userCredential) => {
-        // Get the Twitter screen name.
-        commit('setTwitterLoginUser', userCredential.additionalUserInfo.username);
-      }).catch((error) => {
-        // An error occurred.
-        console.log(error);
-      });
+      firebase.auth().signInWithRedirect(twitter_auth_provider);
+      // firebase.auth().signInWithPopup(twitter_auth_provider).then((userCredential) => {
+      //   // Get the Twitter screen name.
+      //   commit('setTwitterLoginUser', userCredential.additionalUserInfo.username);
+      // }).catch((error) => {
+      //   // An error occurred.
+      //   console.log(error);
+      // });
     },
     logout() {
       firebase.auth().signOut()
