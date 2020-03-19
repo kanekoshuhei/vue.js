@@ -8602,7 +8602,6 @@ request@2.16.x:
     cookie-jar "~0.2.0"
     forever-agent "~0.2.0"
     form-data "~0.0.3"
-    hawk "~0.10.2"
     json-stringify-safe "~3.0.0"
     mime "~1.2.7"
     node-uuid "~1.4.0"
@@ -8884,20 +8883,6 @@ send@0.17.1:
     on-finished "~2.3.0"
     range-parser "~1.2.1"
     statuses "~1.5.0"
-
-send@0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/send/-/send-0.6.0.tgz#a59da9265db7c35141e1079cf1f368ee0d59b3ab"
-  integrity sha1-pZ2pJl23w1FB4Qec8fNo7g1Zs6s=
-  dependencies:
-    debug "1.0.3"
-    depd "0.3.0"
-    escape-html "1.0.1"
-    finished "1.2.2"
-    fresh "0.2.2"
-    mime "1.2.11"
-    ms "0.6.2"
-    range-parser "~1.0.0"
 
 serialize-javascript@^2.1.2:
   version "2.1.2"
