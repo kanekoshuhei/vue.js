@@ -8593,48 +8593,6 @@ request-promise@^4.2.5:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@2.16.x:
-  version "2.16.6"
-  resolved "https://registry.yarnpkg.com/request/-/request-2.16.6.tgz#872fe445ae72de266b37879d6ad7dc948fa01cad"
-  integrity sha1-hy/kRa5y3iZrN4edatfclI+gHK0=
-  dependencies:
-    aws-sign "~0.2.0"
-    cookie-jar "~0.2.0"
-    forever-agent "~0.2.0"
-    form-data "~0.0.3"
-    json-stringify-safe "~3.0.0"
-    mime "~1.2.7"
-    node-uuid "~1.4.0"
-    oauth-sign "~0.2.0"
-    qs "~0.5.4"
-    tunnel-agent "~0.2.0"
-
-request@^2.72.0, request@^2.87.0:
-  version "2.88.2"
-  resolved "https://registry.yarnpkg.com/request/-/request-2.88.2.tgz#d73c918731cb5a87da047e207234146f664d12b3"
-  integrity sha512-MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw==
-  dependencies:
-    aws-sign2 "~0.7.0"
-    aws4 "^1.8.0"
-    caseless "~0.12.0"
-    combined-stream "~1.0.6"
-    extend "~3.0.2"
-    forever-agent "~0.6.1"
-    form-data "~2.3.2"
-    har-validator "~5.1.3"
-    http-signature "~1.2.0"
-    is-typedarray "~1.0.0"
-    isstream "~0.1.2"
-    json-stringify-safe "~5.0.1"
-    mime-types "~2.1.19"
-    oauth-sign "~0.9.0"
-    performance-now "^2.1.0"
-    qs "~6.5.2"
-    safe-buffer "^5.1.2"
-    tough-cookie "~2.5.0"
-    tunnel-agent "^0.6.0"
-    uuid "^3.3.2"
-
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
@@ -8883,6 +8841,20 @@ send@0.17.1:
     on-finished "~2.3.0"
     range-parser "~1.2.1"
     statuses "~1.5.0"
+
+send@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/send/-/send-0.6.0.tgz#a59da9265db7c35141e1079cf1f368ee0d59b3ab"
+  integrity sha1-pZ2pJl23w1FB4Qec8fNo7g1Zs6s=
+  dependencies:
+    debug "1.0.3"
+    depd "0.3.0"
+    escape-html "1.0.1"
+    finished "1.2.2"
+    fresh "0.2.2"
+    mime "1.2.11"
+    ms "0.6.2"
+    range-parser "~1.0.0"
 
 serialize-javascript@^2.1.2:
   version "2.1.2"
@@ -9847,17 +9819,12 @@ tty-browserify@0.0.0:
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
   integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
 
-tunnel-agent@^0.6.0:
+tunnel-agent@^0.6.0, tunnel-agent@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.6.0.tgz#27a5dea06b36b04a0a9966774b290868f0fc40fd"
   integrity sha1-J6XeoGs2sEoKmWZ3SykIaPD8QP0=
   dependencies:
     safe-buffer "^5.0.1"
-
-tunnel-agent@~0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.2.0.tgz#6853c2afb1b2109e45629e492bde35f459ea69e8"
-  integrity sha1-aFPCr7GyEJ5FYp5JK9419Fnqaeg=
 
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
