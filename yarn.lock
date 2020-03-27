@@ -3217,13 +3217,6 @@ cross-spawn@^7.0.0:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-cryptiles@0.1.x:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/cryptiles/-/cryptiles-0.1.3.tgz#1a556734f06d24ba34862ae9cb9e709a3afbff1c"
-  integrity sha1-GlVnNPBtJLo0hirpy55wmjr7/xw=
-  dependencies:
-    boom "0.3.x"
-
 crypto-browserify@^3.11.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/crypto-browserify/-/crypto-browserify-3.12.0.tgz#396cf9f3137f03e4b8e532c58f698254e00f80ec"
@@ -5227,16 +5220,6 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
-hawk@~0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/hawk/-/hawk-0.10.2.tgz#9b361dee95a931640e6d504e05609a8fc3ac45d2"
-  integrity sha1-mzYd7pWpMWQObVBOBWCaj8OsRdI=
-  dependencies:
-    boom "0.3.x"
-    cryptiles "0.1.x"
-    hoek "0.7.x"
-    sntp "0.1.x"
-
 hbo-dnsd@0.9.8:
   version "0.9.8"
   resolved "https://registry.yarnpkg.com/hbo-dnsd/-/hbo-dnsd-0.9.8.tgz#ab964f34cf13b40ea7d412f125d576716c551ef2"
@@ -5268,11 +5251,6 @@ hmac-drbg@^1.0.0:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
-
-hoek@0.7.x:
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/hoek/-/hoek-0.7.6.tgz#60fbd904557541cd2b8795abf308a1b3770e155a"
-  integrity sha1-YPvZBFV1Qc0rh5Wr8wihs3cOFVo=
 
 hoopy@^0.1.4:
   version "0.1.4"
@@ -8880,20 +8858,6 @@ send@0.17.1:
     range-parser "~1.2.1"
     statuses "~1.5.0"
 
-send@0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/send/-/send-0.6.0.tgz#a59da9265db7c35141e1079cf1f368ee0d59b3ab"
-  integrity sha1-pZ2pJl23w1FB4Qec8fNo7g1Zs6s=
-  dependencies:
-    debug "1.0.3"
-    depd "0.3.0"
-    escape-html "1.0.1"
-    finished "1.2.2"
-    fresh "0.2.2"
-    mime "1.2.11"
-    ms "0.6.2"
-    range-parser "~1.0.0"
-
 serialize-javascript@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-2.1.2.tgz#ecec53b0e0317bdc95ef76ab7074b7384785fa61"
@@ -8921,15 +8885,6 @@ serve-static@1.14.1:
     escape-html "~1.0.3"
     parseurl "~1.3.3"
     send "0.17.1"
-
-serve-static@~1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.3.2.tgz#d904a6cbf55f511c78138f6f45ee6e69d9d105ca"
-  integrity sha1-2QSmy/VfURx4E49vRe5uadnRBco=
-  dependencies:
-    escape-html "1.0.1"
-    parseurl "~1.1.3"
-    send "0.6.0"
 
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
@@ -9869,11 +9824,6 @@ tunnel-agent@^0.6.0:
   integrity sha1-J6XeoGs2sEoKmWZ3SykIaPD8QP0=
   dependencies:
     safe-buffer "^5.0.1"
-
-tunnel-agent@~0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.2.0.tgz#6853c2afb1b2109e45629e492bde35f459ea69e8"
-  integrity sha1-aFPCr7GyEJ5FYp5JK9419Fnqaeg=
 
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
