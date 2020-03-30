@@ -115,7 +115,7 @@ export default {
         }
       } else {
         this.deleteLoginUser();
-        this.$router.push({ name: "home" });
+        this.$router.push("/" ,() => {}, () => {});
       }
     });
   },

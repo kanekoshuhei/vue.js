@@ -9,9 +9,9 @@
         <v-card>
           <v-card-text>
             <v-form>
-              <p>{{ plan.date }}</p>
-              <p>{{ plan.show }}</p>
-              <p>{{ plan.twitter_id }}</p>
+              <p>日時：{{ plan.date }}</p>
+              <p>ショー：{{ plan.show }}</p>
+              <p><v-icon>mdi-twitter</v-icon>：{{ plan.twitter_id }}</p>
               <div class="text-center mt-5">
                 <v-btn @click="$router.push({ name: 'plans' })">キャンセル</v-btn>
                 <v-btn

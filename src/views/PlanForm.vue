@@ -2,7 +2,7 @@
   <v-container text-xs-center>
     <v-layout row wrap justify-center>
       <v-flex xs12 class="text-center">
-        <h1>test</h1>
+        <h1>プラン作成</h1>
       </v-flex>
 
       <v-flex mt-5>
@@ -29,7 +29,7 @@
               <v-textarea v-model="plan.message" label="メッセージ" rows="1"></v-textarea>
               <div class="text-center mt-5">
                 <v-btn @click="$router.push({ name: 'plans' })">キャンセル</v-btn>
-                <v-btn color="info" class="ml-2" @click="submit">保存</v-btn>
+                <v-btn color="info" class="ml-2" @click="submit">プランを作成</v-btn>
               </div>
             </v-form>
           </v-card-text>

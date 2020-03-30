@@ -35,8 +35,8 @@
       </v-flex>
     </v-layout>-->
     <v-row justify="space-around">
-      <v-switch inset v-model="ll" class="mx-2" label="L" color="error"></v-switch>
-      <v-switch inset v-model="ss" class="mx-2" label="S" color="info"></v-switch>
+      <v-switch inset v-model="ll" class="mx-2" label="L"></v-switch>
+      <v-switch inset v-model="ss" class="mx-2" label="S"></v-switch>
     </v-row>
     <v-data-iterator :items="plans" :items-per-page.sync="itemsPerPage" hide-default-footer>
       <template v-slot:default="props">
